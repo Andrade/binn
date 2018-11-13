@@ -138,6 +138,20 @@ gcc myapp.c -lbinn-1.0
 ```
 
 
+Compiling the Library for SGX
+-----------------------------
+
+### On Linux:
+
+In branch `sgx`:
+
+```
+$ make sgx
+```
+
+It will create the file `libbinn.a` on Linux
+
+
 Compiling the Library
 ---------------------
 
