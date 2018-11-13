@@ -65,6 +65,10 @@ typedef unsigned short int     u16;
 typedef unsigned int           u32;
 typedef unsigned long long int u64;
 
+double atof(const char *ascii) {
+  return (strtod(ascii, (char **) NULL));
+}
+
 BINN_PRIVATE void copy_be16(u16 *pdest, u16 *psource) {
 #if BYTE_ORDER == LITTLE_ENDIAN
   unsigned char *source = (unsigned char *) psource;
@@ -3309,7 +3313,7 @@ char * APIENTRY binn_get_str(binn *value) {
 
   if (type_family(value->type) == BINN_FAMILY_INT) {
     if (copy_int_value(value->ptr, &vint, value->type, BINN_INT64) == FALSE) return NULL;
-    sprintf(buf, "%" INT64_FORMAT, vint);
+    snprintf(buf, 128, "%" INT64_FORMAT, vint);
     goto loc_convert_value;
   }
 
@@ -3317,7 +3321,7 @@ char * APIENTRY binn_get_str(binn *value) {
   case BINN_FLOAT:
     value->vdouble = value->vfloat;
   case BINN_DOUBLE:
-    sprintf(buf, "%g", value->vdouble);
+    snprintf(buf, 128, "%g", value->vdouble);
     goto loc_convert_value;
   case BINN_STRING:
     return (char*) value->ptr;

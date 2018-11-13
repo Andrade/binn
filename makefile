@@ -52,8 +52,14 @@ else
 	cp src/binn.h /usr/include
 endif
 
+sgx: libbinn.a
+	@echo "Compiled static library for Intel SGX"
+
+libbinn.a: binn.o
+	ar rcs $@ $^
+
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o $(TARGET) libbinn.a
 
 uninstall:
 	rm -f /usr/lib/$(LINK1) /usr/lib/$(LINK2) /usr/lib/$(TARGET) /usr/include/binn.h
